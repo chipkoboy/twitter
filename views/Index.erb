@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body bgcolor="grey">
+<h1 align="center"><font color="skyblue">Twitter</font></h1> 
+<br>
+
+<h3>
+     <i>
+         
+         Hi&nbsp;<%= User.get(user_id).email %>
+         	
+     </i> 
+ </h3>
+
+<br>
+<br>
+
+<form action="/total_users" method="GET">
+      
+      <input type="submit" value="Users of twitter">
+
+</form>
+
+
+
+
+   <form action="/add_Tweet" method="POST"  />
+       <input type="text" name="message" /> 
+       <input type="submit" value="Tweet" />
+   </form>
+
+<ul>
+	
+     <% tweets.each do|tweet| %>
+        <li>
+	          <b>Tweeted By:</b><%=User.get(tweet.user_id).username%>
+            <br>
+            <b>Message:</b><%= tweet.message %>
+             <b>Likes:</b> <%= tweet.like_count %>
+
+<form action="/like" method="POST">
+  <input type="hidden" name="tweet_id" value="<%=tweet.id %>">
+
+  <% if tweet.liked_by user_id %>
+  <input type="submit" name="submit" value="UnLike">
+
+  <% else %>
+
+<input type="submit" name="submit" value="Like">
+  <% end %>
+</form>
+
+<form action="/del" method="POST">
+<input type="hidden" name="id" value="<%=tweet.id%>">
+<input type="submit" value="Delete">  
+</form>
+
+
+
+<form action="/likers" method="GET">
+<input type="submit" value="Show Likers">
+</form>
+
+
+</li>
+<% end %>
+
+ </ul>
+
+
+<a href="/signout"> <input type="submit" value="Sign out" > </a>
+
+
+
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body bgcolor="grey">
+<h1>Likers:</h1>
+
+<ul>
+<% tweets.each do|tweet| %>
+
+<li>
+
+  <% likes.each do|like| %>
+     
+     <% if like.tweet_id.to_i == tweet.id.to_i %>
+        <%= User.get(like.user_id).username %>
+  <br>
+     <% end %>
+     <% end %>
+
+</li>
+ <% end %>
+</ul>
+</body>
+</html>
